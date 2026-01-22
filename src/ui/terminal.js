@@ -169,8 +169,11 @@ export class TerminalUI {
    */
   renderHeader() {
     const title = ' 🎵 SynthAgent - Live Music Maker ';
-    const padding = Math.max(0, Math.floor((this.width - title.length) / 2));
-    return `${Colors.bright}${Colors.cyan}${'═'.repeat(padding)}${title}${'═'.repeat(padding)}${Colors.reset}`;
+    // Ensure we have enough width for the title
+    const availableWidth = Math.max(0, this.width - title.length);
+    const padding = Math.floor(availableWidth / 2);
+    const rightPadding = availableWidth - padding; // Handle odd widths
+    return `${Colors.bright}${Colors.cyan}${'═'.repeat(padding)}${title}${'═'.repeat(rightPadding)}${Colors.reset}`;
   }
 
   /**

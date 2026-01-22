@@ -217,8 +217,10 @@ export class MusicAgent {
         return name;
       }
     }
-    // Default to first track if no match
-    return this.currentConfig.tracks[0]?.name || 'lead';
+    // Default to first track if available, otherwise return null
+    // Commands that receive null should handle it appropriately
+    const firstTrack = this.currentConfig.tracks[0];
+    return firstTrack ? firstTrack.name : null;
   }
 
   /**
@@ -397,6 +399,7 @@ export class MusicAgent {
    * Find track by name (case-insensitive)
    */
   findTrack(name) {
+    if (!name) return null;
     return this.currentConfig.tracks.find(
       t => t.name.toLowerCase() === name.toLowerCase()
     );

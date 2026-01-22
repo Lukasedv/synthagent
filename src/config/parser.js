@@ -360,7 +360,14 @@ export class FileWatcher {
         }
       }
     } catch (err) {
-      // File might be temporarily unavailable during save
+      // Expected errors during file save operations:
+      // - ENOENT: File temporarily removed during atomic save
+      // - EACCES: Temporary permission issue during write
+      // - EBUSY: File locked by another process
+      // These are transient and the next change event will trigger a successful read
+      if (err.code && !['ENOENT', 'EACCES', 'EBUSY'].includes(err.code)) {
+        console.error(`Unexpected file watch error: ${err.code} - ${err.message}`);
+      }
     }
   }
 
