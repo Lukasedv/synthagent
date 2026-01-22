@@ -1,0 +1,24 @@
+{
+  "name": "synthagent",
+  "version": "1.0.0",
+  "description": "A terminal-based synth/music maker with live text editing and AI agent control via GitHub Copilot SDK",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "ai": "node src/ai-mode.js",
+    "test": "node --test src/**/*.test.js"
+  },
+  "keywords": [
+    "synth",
+    "music",
+    "terminal",
+    "ai",
+    "copilot"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
